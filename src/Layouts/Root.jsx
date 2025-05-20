@@ -6,11 +6,11 @@ import Footer from '../Components/Footer/Footer';
 const Root = () => {
     return (
         <>
-            <div className='min-h-screen'>
-                <Navbar></Navbar>
+            <Navbar></Navbar>
+            <div className="min-h-screen">
                 <Outlet></Outlet>
-                <Footer></Footer>
             </div>
+            <Footer></Footer>
         </>
     );
 };
