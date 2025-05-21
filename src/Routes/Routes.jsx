@@ -4,6 +4,11 @@ import {
 import Home from "../Pages/Home/Home";
 import Root from "../Layouts/Root";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import Login from "../Pages/Login/Login";
+import Registration from "../Pages/Registration/Registration";
+import AllGroups from "../Pages/AllGroups/AllGroups";
+import CreateGroups from "../Pages/CreateGroups/CreateGroups";
+import MyGroups from "../Pages/MyGroups/MyGroups";
 
 export const router = createBrowserRouter([
     {
@@ -15,6 +20,26 @@ export const router = createBrowserRouter([
                 index: true,
                 Component: Home,
             },
+            {
+                path: "/login",
+                Component: Login,
+            },
+            {
+                path: "/register",
+                Component: Registration,
+            },
+            {
+                path: "/groups",
+                Component: AllGroups,
+            },
+            {
+                path: "create-group",
+                Component: CreateGroups,
+            },
+            {
+                path: "my-groups",
+                Component: MyGroups,
+            }
         ]
     },
 ]);
