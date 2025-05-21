@@ -77,7 +77,7 @@ const FeaturedGroup = () => {
                                 </div>
                                 <p className="text-xs text-gray-500 mt-1">{group.spotsLeft} spots left</p>
                             </div>
-                            <button className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 cursor-pointer transition">
+                            <button className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-800 cursor-pointer transition">
                                 See Details
                             </button>
                         </div>
