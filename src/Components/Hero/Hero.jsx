@@ -37,11 +37,11 @@ const Hero = () => {
         <div className="relative">
             <Swiper
                 modules={[Autoplay, Pagination, Navigation]}
-                autoplay={{ delay: 7000 }}
+                autoplay={{ delay: 3000 }}
                 loop
                 pagination={{ clickable: true }}
                 navigation
-                className="w-full h-[400px]"
+                className="w-full h-[450px]"
             >
                 {slides.map((slide, index) => (
                     <SwiperSlide key={index} className="h-full">
@@ -55,8 +55,12 @@ const Hero = () => {
                             {/* Text content */}
                             <div className="absolute inset-0 flex items-center justify-center text-center px-4 z-20">
                                 <div>
-                                    <h1 className="text-white text-4xl md:text-5xl font-bold mb-4">{slide.title}</h1>
-                                    <p className="text-white text-lg mb-6">{slide.subtitle}</p>
+                                    <h1 className="text-white text-3xl md:text-5xl font-bold mb-4">{slide.title}</h1>
+                                    <p className="text-white text-sm md:text-lg mb-6 text-center md:w-full w-1/2 mx-auto">
+                                        {slide.subtitle}
+                                    </p>
+
+
                                     {slide.path && (
                                         <button
                                             onClick={() => navigate(slide.path)}
@@ -71,9 +75,7 @@ const Hero = () => {
                     </SwiperSlide>
                 ))}
             </Swiper>
-
-            {/* Optional: fix navigation arrow color */}
-            <style jsx>{`
+            <style jsx >{`
                 .swiper-button-prev,
                 .swiper-button-next {
                     color: blue-800;
