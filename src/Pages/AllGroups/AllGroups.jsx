@@ -33,7 +33,7 @@ const AllGroups = () => {
                                 <span className="mr-1">📅</span>
                                 {group.startDate}
                             </p>
-                            <p className="text-sm text-gray-700 mb-4 line-clamp-2">{group.description}</p>
+                            <p className="text-sm text-gray-700 mb-4 break-words">{group.description}</p>
                             <div className="mb-4">
                                 <div className="h-2 w-full bg-gray-200 rounded-full">
                                     <div

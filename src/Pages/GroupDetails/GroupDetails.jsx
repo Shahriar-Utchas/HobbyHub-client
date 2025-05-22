@@ -8,6 +8,7 @@ const GroupDetails = () => {
 
     const {
         groupCreatorName,
+        groupCreatorEmail,
         groupName,
         hobbyCategory,
         description,
@@ -44,7 +45,7 @@ const GroupDetails = () => {
                     {/* About */}
                     <div>
                         <h2 className="text-xl font-semibold text-gray-900 mb-2">About this group</h2>
-                        <p className="text-gray-700 text-base">
+                        <p className="text-gray-700 text-base break-words">
                             {description}
                         </p>
                     </div>
@@ -70,15 +71,14 @@ const GroupDetails = () => {
                     <div>
                         <h2 className="text-xl font-semibold text-gray-900 mb-4">Organized by</h2>
                         <div className="flex items-center gap-4">
-                            <img
-                                src={user?.photoURL}
-                                alt={groupCreatorName}
-                                className="w-10 h-10 rounded-full object-cover border border-gray-300"
-                            />
+                            <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-medium text-lg">
+                                {groupCreatorName?.charAt(0)}
+                            </div>
+
                             <div>
                                 <div className="font-semibold">{groupCreatorName}</div>
                                 <div className="text-sm text-gray-500">
-                                    {user?.email || "organizer@email.com"}
+                                    {groupCreatorEmail || "organizer@email.com"}
                                 </div>
                             </div>
                         </div>
