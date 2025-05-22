@@ -34,9 +34,9 @@ const PopularCategories = () => {
                     ))}
                 </div>
 
-                <button className="bg-blue-700 hover:bg-blue-900 text-white font-semibold text-sm sm:text-base px-8 py-3 rounded-lg shadow-md transition duration-300 ease-in-out">
+                {/* <button className="bg-blue-700 hover:bg-blue-900 text-white font-semibold text-sm sm:text-base px-8 py-3 rounded-lg shadow-md transition duration-300 ease-in-out">
                     Explore All Categories
-                </button>
+                </button> */}
             </div>
         </section>
     );

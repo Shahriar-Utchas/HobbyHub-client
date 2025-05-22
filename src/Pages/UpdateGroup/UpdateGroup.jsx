@@ -48,7 +48,7 @@ const UpdateGroup = () => {
             groupCreatorName,
             groupCreatorEmail,
             ...initial_groupData,
-            spot_taken: spot_taken - 1,
+            spot_taken,
         };
 
         //Update the group data

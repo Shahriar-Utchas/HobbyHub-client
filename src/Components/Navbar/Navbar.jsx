@@ -2,6 +2,7 @@ import React, { use, useState, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router';
 import { Home, Users, PlusCircle, UserCircle, Menu, LogIn, UserPlus } from 'lucide-react';
 import { AuthContext } from '../../Provider/AuthContext';
+import ToggleTheme from '../ToggleTheme/ToggleTheme';
 
 const Navbar = () => {
     const { user, logout } = use(AuthContext);
@@ -33,10 +34,13 @@ const Navbar = () => {
             <div className="flex items-center justify-between">
                 {/* Logo */}
                 <div className="flex items-center gap-2">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-r from-slate-500 to-blue-500 flex items-center justify-center">
+                    {/* Always show logo icon */}
+                    <Link to="/" className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-slate-500 to-blue-500">
                         <img src="/images/icon.png" alt="logo" className="w-6 h-6" />
-                    </div>
-                    <Link to={"/"} className="hidden lg:flex items-center gap-2">
+                    </Link>
+
+                    {/* Show brand name only on large screens */}
+                    <Link to="/" className="hidden lg:flex items-center gap-2">
                         <span className="text-xl font-bold text-slate-800">
                             <span className="text-slate-900">Hobby</span>
                             <span className="text-blue-500">Hub</span>
@@ -62,11 +66,10 @@ const Navbar = () => {
                             </li>
                         </>
                     )}
-
                 </ul>
 
-                {/* Auth / Profile */}
-                <div className="flex items-center gap-2">
+                {/* Auth / Profile and Controls */}
+                <div className="flex items-center gap-1 lg:gap-4">
                     {user ? (
                         <div className="relative group" ref={profileRef}>
                             {/* Profile Image */}
@@ -81,7 +84,6 @@ const Navbar = () => {
                             <div className="absolute right-full top-1/2 -translate-y-1/2 mr-2 bg-black text-white text-xs px-3 py-1 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition z-50">
                                 {user.displayName || 'User'}
                             </div>
-
 
                             {/* Dropdown */}
                             {isProfileOpen && (
@@ -105,28 +107,30 @@ const Navbar = () => {
                         <>
                             <NavLink
                                 to="/login"
-                                className="flex items-center gap-2 px-5 py-2 text-sm font-semibold text-slate-900 border border-slate-200 rounded-lg bg-white hover:bg-slate-100 transition"
+                                className="flex items-center gap-1 px-3 py-1 text-xs font-semibold text-slate-900 border border-slate-200 rounded-lg bg-white hover:bg-slate-100 transition lg:px-5 lg:py-2 lg:text-sm lg:gap-2"
                             >
-                                <LogIn className="w-4 h-4" />
+                                <LogIn className="w-4 h-6 md:h-4" />
                                 Login
                             </NavLink>
                             <NavLink
                                 to="/register"
-                                className="flex items-center gap-2 px-5 py-2 text-sm font-semibold text-white bg-slate-900 rounded-lg hover:bg-slate-800 transition"
+                                className="flex items-center gap-1 px-3 py-1 text-xs font-semibold text-white bg-slate-900 rounded-lg hover:bg-slate-800 transition lg:px-5 lg:py-2 lg:text-sm lg:gap-2"
                             >
-                                <UserPlus className="w-4 h-4" />
+                                <UserPlus className="w-4 h-6 md:h-4" />
                                 Register
                             </NavLink>
                         </>
                     )}
 
                     {/* Mobile Menu Toggle */}
-                    <button
-                        className="btn btn-ghost btn-circle lg:hidden"
-                        onClick={toggleMobileMenu}
-                    >
+                    <button className="btn btn-ghost btn-circle p-1 lg:hidden" onClick={toggleMobileMenu}>
                         <Menu className="w-5 h-5 text-slate-800" />
                     </button>
+
+                    {/* Theme Toggle */}
+                    <div className="pl-1">
+                        <ToggleTheme />
+                    </div>
                 </div>
             </div>
 
