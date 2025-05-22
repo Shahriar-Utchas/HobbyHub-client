@@ -25,9 +25,9 @@ const PopularCategories = () => {
                     {categories.map((category, index) => (
                         <div
                             key={index}
-                            className="bg-white text-gray-700 font-semibold text-sm sm:text-base py-5 px-4 rounded-xl border shadow-sm 
+                            className="bg-white text-gray-700 font-semibold text-sm sm:text-base py-3 px-3 rounded-lg border shadow-sm 
                                        hover:shadow-md hover:bg-blue-50 hover:text-blue-800 transform hover:scale-105 
-                                       transition-all duration-300 ease-in-out h-[90%] flex items-center justify-center"
+                                       transition-all duration-300 ease-in-out h-[60px] flex items-center justify-center text-center"
                         >
                             {category}
                         </div>
