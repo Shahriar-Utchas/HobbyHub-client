@@ -41,7 +41,7 @@ const Hero = () => {
                 loop
                 pagination={{ clickable: true }}
                 navigation
-                className="w-full h-[450px]"
+                className="w-full h-[550px]"
             >
                 {slides.map((slide, index) => (
                     <SwiperSlide key={index} className="h-full">
