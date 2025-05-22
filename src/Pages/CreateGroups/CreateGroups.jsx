@@ -1,10 +1,14 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../Provider/AuthContext';
 
 const CreateGroups = () => {
     const { user } = useContext(AuthContext);
     const [isCreating, setIsCreating] = useState(false);
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();

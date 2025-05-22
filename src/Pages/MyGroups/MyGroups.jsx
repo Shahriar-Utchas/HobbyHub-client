@@ -15,6 +15,10 @@ const MyGroups = () => {
         }
     }, [user]);
 
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, []);
+
     const handleDelete = async (groupId) => {
         const result = await Swal.fire({
             title: 'Are you sure?',
@@ -111,7 +115,7 @@ const MyGroups = () => {
                                             See Details
                                         </button>
                                     </Link>
-                                    <Link to={`/update-group/${group._id}`} className="w-full">
+                                    <Link to={`/updateGroup/${group._id}`} className="w-full">
                                         <button className="w-full bg-yellow-500 text-white py-2 rounded-md hover:bg-yellow-600 transition">
                                             Update
                                         </button>
