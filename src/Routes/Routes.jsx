@@ -19,6 +19,10 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
+                loader: () => fetch("http://localhost:3000/groups"),
+                hydrateFallbackElement: <div className="flex justify-center items-center h-screen">
+                    <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-blue-500"></div>
+                </div>,
                 Component: Home,
             },
             {
@@ -31,16 +35,18 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/groups",
+                loader: () => fetch("http://localhost:3000/groups"),
+                hydrateFallbackElement: <div className="flex justify-center items-center h-screen">
+                    <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-blue-500"></div>
+                </div>,
                 Component: AllGroups,
             },
             {
                 path: "create-group",
-                // Component: CreateGroups,
                 element: <PrivateRoutes><CreateGroups></CreateGroups></PrivateRoutes>
             },
             {
                 path: "my-groups",
-                // Component: MyGroups,
                 element: <PrivateRoutes><MyGroups></MyGroups></PrivateRoutes>
             }
         ]

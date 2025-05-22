@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Hero from '../../Components/Hero/Hero';
-import FeaturedGroup from '../../Components/FeaturedGroup/FeaturedGroup';
 import HobbyHubWorks from '../../Components/HobbyHubWorks/HobbyHubWorks';
 import PopularCategories from '../../Components/PopularCategories/PopularCategories';
+import AllGroups from '../AllGroups/AllGroups';
 
 const fadeInUp = {
     initial: { opacity: 0, y: 50 },
@@ -22,17 +22,9 @@ const Home = () => {
                 <Hero />
             </motion.div>
 
-            <motion.div {...fadeInUp} transition={{ ...fadeInUp.transition, delay: 0.2 }}>
-                <FeaturedGroup />
-            </motion.div>
-
-            <motion.div {...fadeInUp} transition={{ ...fadeInUp.transition, delay: 0.4 }}>
-                <HobbyHubWorks />
-            </motion.div>
-
-            <motion.div {...fadeInUp} transition={{ ...fadeInUp.transition, delay: 0.6 }}>
-                <PopularCategories />
-            </motion.div>
+            {/* <FeaturedGroup /> */}
+            <AllGroups></AllGroups>
+            <PopularCategories />
         </>
     );
 };

@@ -17,6 +17,7 @@ const CreateGroups = () => {
             groupCreatorName: user.displayName,
             groupCreatorEmail: user.email,
             ...initial_groupData,
+            spot_taken: 1,
         };
 
         fetch('http://localhost:3000/createGroup', {
