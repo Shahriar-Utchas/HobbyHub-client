@@ -1,5 +1,5 @@
 import { Eye, EyeOff } from 'lucide-react';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { AuthContext } from '../../Provider/AuthContext';
@@ -7,15 +7,33 @@ import { useNavigate, useLocation } from 'react-router';
 import toast, { Toaster } from 'react-hot-toast';
 
 const Login = () => {
-    const { SetUser, handleGoogleLogin, loginWithEmail } = useContext(AuthContext);
+    const { user, SetUser, handleGoogleLogin, loginWithEmail } = useContext(AuthContext);
     const [formData, setFormData] = useState({ email: '', password: '' });
     const [error, setError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [passwordFocused, setPasswordFocused] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [redirectMessage, setRedirectMessage] = useState('');
 
     const navigate = useNavigate();
     const location = useLocation();
+
+    useEffect(() => {
+        if (location?.state) {
+            setRedirectMessage('You must log in to access that page.');
+        }
+    }, [location]);
+
+
+    // useEffect(() => {
+    //     if (user) {
+    //         navigate(location?.state || '/');
+    //     }
+    // }, [user, navigate]);
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -30,7 +48,7 @@ const Login = () => {
                 toast.success('Welcome back!');
                 setTimeout(() => {
                     setLoading(false);
-                    navigate('/');
+                    navigate(location?.state || '/')
                 }, 1000);
             })
             .catch((error) => {
@@ -50,7 +68,7 @@ const Login = () => {
                 toast.success('Welcome back!');
                 setTimeout(() => {
                     setLoading(false);
-                    navigate('/');
+                    navigate(location?.state || '/')
                 }, 1000);
             })
             .catch((error) => {
@@ -76,6 +94,12 @@ const Login = () => {
     return (
         <>
             <Toaster position="top-right" />
+            {redirectMessage && (
+                <p className="text-yellow-600 text-sm absolute left-1/2 -translate-x-1/2 mt-4">
+                    {redirectMessage}
+                </p>
+            )}
+
             <div className="min-h-screen flex items-center justify-center bg-white px-4">
                 <div className="max-w-md w-full space-y-6">
                     <div className="text-center">

@@ -15,28 +15,30 @@ const categories = [
 
 const PopularCategories = () => {
     return (
-        <div className="bg-gray-100 py-16 px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-10">
-                Popular Categories
-            </h2>
+        <section className="bg-gray-100 py-10 px-6">
+            <div className="max-w-7xl mx-auto text-center">
+                <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-12">
+                    Popular Categories
+                </h2>
 
-            <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
-                {categories.map((category, index) => (
-                    <div
-                        key={index}
-                        className="bg-white text-gray-800 font-medium py-4 px-6 rounded-lg shadow-sm border 
-                                   hover:shadow-lg hover:bg-blue-50 transform hover:scale-105 
-                                   transition-all duration-300 ease-in-out"
-                    >
-                        {category}
-                    </div>
-                ))}
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 mb-12">
+                    {categories.map((category, index) => (
+                        <div
+                            key={index}
+                            className="bg-white text-gray-700 font-semibold text-sm sm:text-base py-5 px-4 rounded-xl border shadow-sm 
+                                       hover:shadow-md hover:bg-blue-50 hover:text-blue-800 transform hover:scale-105 
+                                       transition-all duration-300 ease-in-out h-[90%] flex items-center justify-center"
+                        >
+                            {category}
+                        </div>
+                    ))}
+                </div>
+
+                <button className="bg-blue-700 hover:bg-blue-900 text-white font-semibold text-sm sm:text-base px-8 py-3 rounded-lg shadow-md transition duration-300 ease-in-out">
+                    Explore All Categories
+                </button>
             </div>
-
-            <button className="bg-blue-600 hover:bg-blue-800 text-white font-medium px-6 py-3 rounded-md shadow transition duration-300 ease-in-out cursor-pointer">
-                Explore All Categories
-            </button>
-        </div>
+        </section>
     );
 };
 

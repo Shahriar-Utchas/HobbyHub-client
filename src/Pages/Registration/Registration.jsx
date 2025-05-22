@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
@@ -9,6 +9,9 @@ import toast, { Toaster } from 'react-hot-toast';
 const Registration = () => {
     const { createUser, handleGoogleLogin } = useContext(AuthContext);
     const navigate = useNavigate();
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, []);
 
     const [formData, setFormData] = useState({
         name: '',

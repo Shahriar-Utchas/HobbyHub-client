@@ -9,6 +9,7 @@ import Registration from "../Pages/Registration/Registration";
 import AllGroups from "../Pages/AllGroups/AllGroups";
 import CreateGroups from "../Pages/CreateGroups/CreateGroups";
 import MyGroups from "../Pages/MyGroups/MyGroups";
+import PrivateRoutes from "./PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -34,11 +35,13 @@ export const router = createBrowserRouter([
             },
             {
                 path: "create-group",
-                Component: CreateGroups,
+                // Component: CreateGroups,
+                element: <PrivateRoutes><CreateGroups></CreateGroups></PrivateRoutes>
             },
             {
                 path: "my-groups",
-                Component: MyGroups,
+                // Component: MyGroups,
+                element: <PrivateRoutes><MyGroups></MyGroups></PrivateRoutes>
             }
         ]
     },

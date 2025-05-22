@@ -46,8 +46,21 @@ const Navbar = () => {
                 <ul className="hidden lg:flex gap-6">
                     <li><NavLink to="/" className={navLinkClass}><Home className="w-4 h-4" /> Home</NavLink></li>
                     <li><NavLink to="/groups" className={navLinkClass}><Users className="w-4 h-4" /> All Groups</NavLink></li>
-                    <li><NavLink to="/create-group" className={navLinkClass}><PlusCircle className="w-4 h-4" /> Create Group</NavLink></li>
-                    <li><NavLink to="/my-groups" className={navLinkClass}><UserCircle className="w-4 h-4" /> My Groups</NavLink></li>
+                    {user && (
+                        <>
+                            <li>
+                                <NavLink to="/create-group" className={navLinkClass}>
+                                    <PlusCircle className="w-4 h-4" /> Create Group
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/my-groups" className={navLinkClass}>
+                                    <UserCircle className="w-4 h-4" /> My Groups
+                                </NavLink>
+                            </li>
+                        </>
+                    )}
+
                 </ul>
 
                 {/* Auth / Profile */}
