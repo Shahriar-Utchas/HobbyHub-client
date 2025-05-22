@@ -10,12 +10,13 @@ import AllGroups from "../Pages/AllGroups/AllGroups";
 import CreateGroups from "../Pages/CreateGroups/CreateGroups";
 import MyGroups from "../Pages/MyGroups/MyGroups";
 import PrivateRoutes from "./PrivateRoute";
+import GroupDetails from "../Pages/GroupDetails/GroupDetails";
 
 export const router = createBrowserRouter([
     {
         path: "/",
         Component: Root,
-        errorElement: <ErrorPage />,
+        // errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
@@ -48,6 +49,14 @@ export const router = createBrowserRouter([
             {
                 path: "my-groups",
                 element: <PrivateRoutes><MyGroups></MyGroups></PrivateRoutes>
+            },
+            {
+                path: "groupDetails/:id",
+                loader: ({ params }) => fetch(`http://localhost:3000/group/${params.id}`),
+                hydrateFallbackElement: <div className="flex justify-center items-center h-screen">
+                    <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-blue-500"></div>
+                </div>,
+                element: <PrivateRoutes><GroupDetails></GroupDetails></PrivateRoutes>
             }
         ]
     },

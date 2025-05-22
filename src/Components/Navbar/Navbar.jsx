@@ -1,5 +1,5 @@
 import React, { use, useState, useEffect, useRef } from 'react';
-import { NavLink } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import { Home, Users, PlusCircle, UserCircle, Menu, LogIn, UserPlus } from 'lucide-react';
 import { AuthContext } from '../../Provider/AuthContext';
 
@@ -36,10 +36,12 @@ const Navbar = () => {
                     <div className="w-10 h-10 rounded-full bg-gradient-to-r from-slate-500 to-blue-500 flex items-center justify-center">
                         <img src="/images/icon.png" alt="logo" className="w-6 h-6" />
                     </div>
-                    <span className="text-xl font-bold text-slate-800">
-                        <span className="text-slate-900">Hobby</span>
-                        <span className="text-blue-500">Hub</span>
-                    </span>
+                    <Link to={"/"} className="hidden lg:flex items-center gap-2">
+                        <span className="text-xl font-bold text-slate-800">
+                            <span className="text-slate-900">Hobby</span>
+                            <span className="text-blue-500">Hub</span>
+                        </span>
+                    </Link>
                 </div>
 
                 {/* Desktop Nav */}

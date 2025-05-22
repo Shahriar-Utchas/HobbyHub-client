@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLoaderData } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 
 const AllGroups = () => {
     const groupsData = useLoaderData();
@@ -41,11 +41,13 @@ const AllGroups = () => {
                                         style={{ width: `${(group.spot_taken / group.maxMembers) * 100}%` }}
                                     ></div>
                                 </div>
-                                <p className="text-xs text-gray-500 mt-1">{(group.maxMembers-group.spot_taken)} spots left</p>
+                                <p className="text-xs text-gray-500 mt-1">{(group.maxMembers - group.spot_taken)} spots left</p>
                             </div>
-                            <button className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-800 cursor-pointer transition">
-                                See Details
-                            </button>
+                            <Link to={`/GroupDetails/${group._id}`}>
+                                <button className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-800 cursor-pointer transition">
+                                    See Details
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 ))}
