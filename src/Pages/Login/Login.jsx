@@ -100,16 +100,16 @@ const Login = () => {
                 </p>
             )}
 
-            <div className="min-h-screen flex items-center justify-center bg-white px-4">
+            <div className="min-h-screen flex items-center justify-center bg-base px-4">
                 <div className="max-w-md w-full space-y-6">
                     <div className="text-center">
-                        <h2 className="text-3xl font-bold text-gray-900">Welcome Back</h2>
-                        <p className="mt-2 text-gray-500">Log in to your HobbyHub account</p>
+                        <h2 className="text-3xl font-bold">Welcome Back</h2>
+                        <p className="mt-2 text-base">Log in to your HobbyHub account</p>
                     </div>
 
                     <form className="space-y-5" onSubmit={handleSubmit}>
                         <div>
-                            <label htmlFor="email" className="block mb-1 font-medium text-gray-900">
+                            <label htmlFor="email" className="block mb-1 font-medium text-base">
                                 Email
                             </label>
                             <input
@@ -126,7 +126,7 @@ const Login = () => {
                         </div>
 
                         <div>
-                            <label htmlFor="password" className="block mb-1 font-medium text-gray-900">
+                            <label htmlFor="password" className="block mb-1 font-medium text-base">
                                 Password
                             </label>
                             <div className="relative">
@@ -163,7 +163,7 @@ const Login = () => {
 
                         <button
                             type="submit"
-                            className={`w-full py-3 rounded-lg transition-colors cursor-pointer ${loading
+                            className={`w-full py-3 rounded-lg transition-colors cursor-pointer border ${loading
                                 ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
                                 : 'bg-gray-900 text-white hover:bg-gray-800'
                                 }`}
@@ -173,20 +173,20 @@ const Login = () => {
                         </button>
                     </form>
 
-                    <p className="text-center text-gray-700">
+                    <p className="text-center text-base">
                         Don't have an account?{' '}
-                        <a href="/register" className="text-gray-900 font-semibold hover:underline">
+                        <a href="/register" className="text-base font-semibold hover:underline">
                             Register
                         </a>
                     </p>
                     <div className="mt-6 space-y-3">
                         <button
-                            className="flex items-center justify-center w-full gap-2 border border-gray-300 rounded-xl py-2 transition duration-300 ease-in-out transform hover:bg-yellow-100 hover:scale-105 hover:shadow-md active:scale-95 cursor-pointer"
+                            className="flex items-center justify-center w-full gap-2 border border-gray-300 rounded-xl py-2 transition duration-300 ease-in-out transform hover:bg-yellow-100 hover:scale-105 hover:shadow-md active:scale-95 cursor-pointer hover:text-black"
                             onClick={handleGoogleLoginClick}
                             disabled={loading}
                         >
                             <FcGoogle className="text-xl" />
-                            <span className="text-sm font-medium text-gray-700">Continue with Google</span>
+                            <span className="text-sm font-medium">Continue with Google</span>
                         </button>
                         <button
                             disabled

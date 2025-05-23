@@ -31,10 +31,10 @@ const GroupDetails = () => {
             <div className="relative w-full h-64 rounded-xl overflow-hidden mb-10">
                 <img src={imageUrl} alt={groupName} className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-black/40 flex flex-col justify-end p-6">
-                    <span className="text-white text-sm bg-black/60 px-3 py-1 rounded-full w-fit mb-2">
+                    <span className="text-sm text-white bg-black/60 px-3 py-1 rounded-full w-fit mb-2">
                         {hobbyCategory}
                     </span>
-                    <h1 className="text-3xl md:text-4xl font-bold text-white">{groupName}</h1>
+                    <h1 className="text-3xl text-white md:text-4xl font-bold">{groupName}</h1>
                 </div>
             </div>
 
@@ -44,22 +44,22 @@ const GroupDetails = () => {
                 <div className="md:col-span-2 space-y-10">
                     {/* About */}
                     <div>
-                        <h2 className="text-xl font-semibold text-gray-900 mb-2">About this group</h2>
-                        <p className="text-gray-700 text-base break-words">
+                        <h2 className="text-xl font-semibold mb-2">About this group</h2>
+                        <p className=" text-base break-words">
                             {description}
                         </p>
                     </div>
 
                     {/* Meeting Details Card */}
                     <div>
-                        <h2 className="text-xl font-semibold text-gray-900 mb-4">Meeting Details</h2>
-                        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 grid sm:grid-cols-2 gap-4 text-gray-800">
+                        <h2 className="text-xl font-semibold mb-4">Meeting Details</h2>
+                        <div className="bg-base border border-gray-300 rounded-lg p-4 grid sm:grid-cols-2 gap-4">
                             <div>
-                                <div className="text-sm text-gray-500">Location</div>
+                                <div className="text-sm ">Location</div>
                                 <div className="font-semibold">{meetingLocation}</div>
                             </div>
                             <div>
-                                <div className="text-sm text-gray-500">Starting Date</div>
+                                <div className="text-sm ">Starting Date</div>
                                 <div className="font-semibold">
                                     {new Date(startDate).toLocaleDateString()}
                                 </div>
@@ -69,7 +69,7 @@ const GroupDetails = () => {
 
                     {/* Organizer Info */}
                     <div>
-                        <h2 className="text-xl font-semibold text-gray-900 mb-4">Organized by</h2>
+                        <h2 className="text-xl font-semibold  mb-4">Organized by</h2>
                         <div className="flex items-center gap-4">
                             <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-medium text-lg">
                                 {groupCreatorName?.charAt(0)}
@@ -77,7 +77,7 @@ const GroupDetails = () => {
 
                             <div>
                                 <div className="font-semibold">{groupCreatorName}</div>
-                                <div className="text-sm text-gray-500">
+                                <div className="text-sm ">
                                     {groupCreatorEmail || "organizer@email.com"}
                                 </div>
                             </div>
@@ -87,14 +87,14 @@ const GroupDetails = () => {
                 </div>
 
                 {/* Right side: Status box */}
-                <div className="bg-white rounded-xl border border-gray-200 shadow p-6 space-y-4">
-                    <h3 className="text-lg font-semibold text-gray-900">Group Status</h3>
-                    <div className="text-sm text-gray-700">
+                <div className="bg-base rounded-xl border border-gray-300 shadow p-6 space-y-4">
+                    <h3 className="text-lg font-semibold ">Group Status</h3>
+                    <div className="text-sm ">
                         <p>Members: <span className="font-bold">{spot_taken} / {maxMembers}</span></p>
                     </div>
 
                     {/* Progress bar */}
-                    <div className="w-full bg-gray-200 rounded-full h-3">
+                    <div className="w-full bg-gray-300 rounded-full h-3">
                         <div
                             className="bg-gray-800 h-3 rounded-full transition-all duration-300"
                             style={{ width: `${progress}%` }}
@@ -102,7 +102,7 @@ const GroupDetails = () => {
                     </div>
 
                     {/* Join Button */}
-                    <button className="w-full bg-gray-900 hover:bg-black text-white py-2 rounded-md transition duration-300">
+                    <button className="w-full bg-gray-900 hover:bg-black text-white py-2 rounded-md transition duration-300 border border-gray-300">
                         Join Group
                     </button>
                 </div>

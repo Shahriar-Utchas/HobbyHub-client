@@ -47,11 +47,11 @@ const MyGroups = () => {
     };
 
     return (
-        <div className="min-h-screen bg-white p-8">
+        <div className="min-h-screen bg-base p-8">
             {/* Top Bar */}
             <div className="flex justify-between items-center mb-8">
                 <div>
-                    <h1 className="text-4xl font-bold text-gray-900">My Groups</h1>
+                    <h1 className="text-4xl font-bold">My Groups</h1>
                     <p className="text-gray-500 mt-1">Manage the hobby groups you've created</p>
                 </div>
                 <Link to="/create-group">
@@ -64,7 +64,7 @@ const MyGroups = () => {
             {/* Check if groups exist */}
             {groups.length === 0 ? (
                 <div className="flex flex-col items-center justify-center mt-40 text-center">
-                    <h2 className="text-xl font-semibold text-gray-900 mb-2">You haven't created any groups yet</h2>
+                    <h2 className="text-xl font-semibold mb-2">You haven't created any groups yet</h2>
                     <p className="text-gray-500 mb-6">
                         Start by creating a new hobby group to connect with like-minded people
                     </p>
@@ -79,25 +79,25 @@ const MyGroups = () => {
                     {groups.map(group => (
                         <div
                             key={group._id}
-                            className="border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 bg-white"
+                            className="border border-gray-300 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 bg-base"
                         >
                             <div className="relative">
                                 <img src={group.imageUrl} alt={group.groupName} className="w-full h-48 object-cover" />
-                                <span className="absolute top-2 right-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-full">
+                                <span className="absolute top-2 right-2 bg-orange-500 text-xs px-2 py-1 rounded-full">
                                     {group.hobbyCategory}
                                 </span>
                             </div>
                             <div className="p-4">
                                 <h3 className="text-lg font-semibold mb-1">{group.groupName}</h3>
-                                <p className="text-sm text-gray-600 mb-1">
+                                <p className="text-sm mb-1">
                                     <span className="mr-1">📍</span>
                                     {group.meetingLocation}
                                 </p>
-                                <p className="text-sm text-gray-600 mb-2">
+                                <p className="text-sm mb-2">
                                     <span className="mr-1">📅</span>
                                     {new Date(group.startDate).toLocaleDateString()}
                                 </p>
-                                <p className="text-sm text-gray-700 mb-4 line-clamp-2">{group.description}</p>
+                                <p className="text-sm mb-4 line-clamp-2">{group.description}</p>
                                 <div className="mb-4">
                                     <div className="h-2 w-full bg-gray-200 rounded-full">
                                         <div
@@ -105,7 +105,7 @@ const MyGroups = () => {
                                             style={{ width: `${(group.spot_taken / group.maxMembers) * 100}%` }}
                                         ></div>
                                     </div>
-                                    <p className="text-xs text-gray-500 mt-1">{group.maxMembers - group.spot_taken} spots left</p>
+                                    <p className="text-xs mt-1">{group.maxMembers - group.spot_taken} spots left</p>
                                 </div>
 
                                 {/* Action Buttons */}

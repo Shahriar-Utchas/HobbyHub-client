@@ -26,9 +26,25 @@ const Navbar = () => {
   const navLinkClass = ({ isActive }) =>
     `flex items-center gap-1 transition ${isActive ? 'text-primary underline underline-offset-8' : 'text-base-content hover:text-primary'
     }`;
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
 
   return (
-    <nav className="bg-base-100 shadow-sm px-4 lg:px-8 py-2 relative z-50">
+    <nav
+      className={`sticky top-0 z-[1000] px-4 lg:px-8 py-2 transition-colors duration-300 ${isScrolled
+        ? 'bg-transparent backdrop-blur shadow-none'
+        : 'bg-base-200 shadow-md'
+        }`}
+    >
       <div className="flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center gap-2">
