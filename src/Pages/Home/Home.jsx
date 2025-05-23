@@ -4,6 +4,8 @@ import Hero from '../../Components/Hero/Hero';
 import HobbyHubWorks from '../../Components/HobbyHubWorks/HobbyHubWorks';
 import PopularCategories from '../../Components/PopularCategories/PopularCategories';
 import AllGroups from '../AllGroups/AllGroups';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const fadeInUp = {
     initial: { opacity: 0, y: 50 },
@@ -14,6 +16,12 @@ const fadeInUp = {
 const Home = () => {
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        AOS.init({
+            duration: 800,
+            offset: 100,
+            easing: 'ease-in-out',
+            once: true,
+        });
     }, []);
 
     return (
@@ -22,9 +30,17 @@ const Home = () => {
                 <Hero />
             </motion.div>
 
-            {/* <FeaturedGroup /> */}
-            <AllGroups></AllGroups>
-            <PopularCategories />
+            <div data-aos="fade-up">
+                <AllGroups />
+            </div>
+
+            <div data-aos="fade-up">
+                <HobbyHubWorks />
+            </div>
+
+            <div data-aos="fade-up">
+                <PopularCategories />
+            </div>
         </>
     );
 };
