@@ -13,6 +13,11 @@ const Navbar = () => {
   const toggleMobileMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleProfileMenu = () => setIsProfileOpen((prev) => !prev);
 
+  // Close profile dropdown when user changes (logout/login)
+  useEffect(() => {
+    setIsProfileOpen(false);
+  }, [user]);
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (profileRef.current && !profileRef.current.contains(event.target)) {

@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { Link, useLoaderData } from 'react-router';
 
 const AllGroups = () => {
   const groupsData = useLoaderData();
+  const [showAll, setShowAll] = useState(false);
+  const topRef = useRef(null); // ref to scroll to
+
+  const displayedGroups = showAll ? groupsData : groupsData.slice(0, 6);
+
+  const handleToggle = () => {
+    if (showAll && topRef.current) {
+      topRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+    setShowAll(prev => !prev);
+  };
 
   return (
     <>
-      <div>
+      <div ref={topRef}>
         <h2 className="text-4xl font-bold text-center my-6 text-base-content">Featured Groups</h2>
         <p className="text-center text-base-content/70 mb-2">
           Join our community and explore new interests with like-minded individuals.
@@ -14,7 +25,7 @@ const AllGroups = () => {
       </div>
 
       <div className="bg-base py-10 px-4 grid md:grid-cols-3 gap-6 transition-colors duration-300">
-        {groupsData.map((group, index) => (
+        {displayedGroups.map((group, index) => (
           <div
             key={index}
             className="border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 bg-white dark:bg-base-100 dark:border-base-300"
@@ -58,11 +69,16 @@ const AllGroups = () => {
         ))}
       </div>
 
-      <div className="text-center my-6">
-        <button className="bg-slate-900 text-white py-2 px-4 rounded-md hover:bg-slate-700 transition">
-          View All Groups
-        </button>
-      </div>
+      {groupsData.length > 6 && (
+        <div className="text-center my-6">
+          <button
+            onClick={handleToggle}
+            className="bg-slate-900 text-white py-2 px-4 rounded-md hover:bg-slate-700 transition"
+          >
+            {showAll ? 'Show Less' : 'View All Groups'}
+          </button>
+        </div>
+      )}
     </>
   );
 };

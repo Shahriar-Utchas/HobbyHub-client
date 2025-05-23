@@ -84,9 +84,25 @@ const CreateGroups = () => {
                         <option value="" disabled hidden>
                             Select a category
                         </option>
+
                         <option value="Sports" className="text-base-content bg-base-100">Sports</option>
+
+                        <option value="Movies" className="text-base-content bg-base-100">Movies</option>
+
                         <option value="Music" className="text-base-content bg-base-100">Music</option>
+
+                        <option value="Video Gaming" className="text-base-content bg-base-100">Video Gaming</option>
+
+                        <option value="Photography" className="text-base-content bg-base-100">Photography</option>
+
                         <option value="Art" className="text-base-content bg-base-100">Art</option>
+
+                        <option value="Reading" className="text-base-content bg-base-100">Reading</option>
+
+                        <option value="Writing " className="text-base-content bg-base-100">Writing </option>
+
+                        <option value="Cooking" className="text-base-content bg-base-100">Cooking</option>
+
                     </select>
                 </div>
 

@@ -6,24 +6,29 @@ import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import { useNavigate } from 'react-router'
 import { motion } from 'framer-motion'
+import Lottie from 'lottie-react';
+import slide1Animation from '../../../public/lotties/slide1.json'
+import slide2Animation from '../../../public/lotties/slide2.json'
+import slide3Animation from '../../../public/lotties/slide3.json'
+
 
 const slides = [
     {
-        image: '/images/hero-bg-1.jpg',
+        animationData: slide1Animation,
         title: 'Discover Local Hobby Groups',
         subtitle: 'Connect with like-minded individuals in your area who share your passions.',
         button: 'Browse Group',
         path: '/my-groups',
     },
     {
-        image: '/images/hero-bg-2.jpg',
+        animationData: slide2Animation,
         title: 'Start Your Own Group',
         subtitle: 'Create a community around your favorite hobby and invite others to join.',
         button: 'Create Group',
         path: '/create-group',
     },
     {
-        image: '/images/hero-bg-3.jpg',
+        animationData: slide3Animation,
         title: 'Discover New Interests',
         subtitle: 'Explore a variety of hobbies and discover new passions with HobbyHub.',
         button: 'Browse Hobbies',
@@ -45,11 +50,15 @@ const Hero = () => {
                 className="w-full h-[450px]"
             >
                 {slides.map((slide, index) => (
-                    <SwiperSlide key={index} className="h-full">
-                        <div
-                            className="relative w-full h-full bg-cover bg-center"
-                            style={{ backgroundImage: `url(${slide.image})` }}
-                        >
+                    <SwiperSlide key={index} className="h-full flex items-center justify-center">
+                        <div className="relative w-full h-full">
+                            {/* Lottie animation */}
+                            <Lottie
+                                animationData={slide.animationData}
+                                loop={true}
+                                className="w-full h-full object-contain"
+                            />
+
                             {/* Overlay */}
                             <div className="absolute inset-0 bg-black/50 z-10"></div>
 
@@ -77,6 +86,7 @@ const Hero = () => {
                             </div>
                         </div>
                     </SwiperSlide>
+
                 ))}
             </Swiper>
             <style jsx>{`
