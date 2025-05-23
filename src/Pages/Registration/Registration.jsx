@@ -7,8 +7,9 @@ import { AuthContext } from '../../Provider/AuthContext';
 import toast, { Toaster } from 'react-hot-toast';
 
 const Registration = () => {
-    const { createUser, handleGoogleLogin } = useContext(AuthContext);
+    const { createUser, handleGoogleLogin, handleGitHubLogin } = useContext(AuthContext);
     const navigate = useNavigate();
+
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }, []);
@@ -17,28 +18,25 @@ const Registration = () => {
         name: '',
         email: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        photoURL: ''
     });
 
     const [errors, setErrors] = useState({
         name: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        photoURL: ''
     });
 
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
-
-    // Track if confirm password was touched (blurred once)
     const [confirmFocused, setConfirmFocused] = useState(false);
     const [confirmTouched, setConfirmTouched] = useState(false);
-
-    // Track if password input is focused
     const [passwordFocused, setPasswordFocused] = useState(false);
-
     const [loading, setLoading] = useState(false);
 
-    // Validation functions
+    // Validation
     const validateName = (name) => {
         if (!name || name.trim().length < 6) return "Name must be at least 6 characters.";
         return "";
@@ -56,68 +54,65 @@ const Registration = () => {
         return "";
     };
 
+    const validatePhotoURL = (url) => {
+        if (!url) return '';
+        const pattern = /^(https?:\/\/.*\.(?:png|jpg|jpeg|webp|gif))$/i;
+        return pattern.test(url) ? '' : 'Invalid image URL.';
+    };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
 
         setErrors(prev => {
-            let newErrors = { ...prev };
+            const newErrors = { ...prev };
 
-            if (name === "name") newErrors.name = validateName(value);
-
-            if (name === "password") {
+            if (name === 'name') newErrors.name = validateName(value);
+            if (name === 'password') {
                 newErrors.password = validatePassword(value);
-                // Also update confirm password error if confirmPassword has value
                 newErrors.confirmPassword = validateConfirmPassword(value, formData.confirmPassword);
             }
-
-            if (name === "confirmPassword") {
+            if (name === 'confirmPassword') {
                 newErrors.confirmPassword = validateConfirmPassword(formData.password, value);
+            }
+            if (name === 'photoURL') {
+                newErrors.photoURL = validatePhotoURL(value);
             }
 
             return newErrors;
         });
     };
 
-    // Confirm password focus/blur handlers to manage touched state
-    const handleConfirmFocus = () => {
-        setConfirmFocused(true);
-    };
-
+    const handleConfirmFocus = () => setConfirmFocused(true);
     const handleConfirmBlur = () => {
         setConfirmFocused(false);
         setConfirmTouched(true);
     };
-
-    // Password focus/blur handlers
-    const handlePasswordFocus = () => {
-        setPasswordFocused(true);
-    };
-
-    const handlePasswordBlur = () => {
-        setPasswordFocused(false);
-    };
+    const handlePasswordFocus = () => setPasswordFocused(true);
+    const handlePasswordBlur = () => setPasswordFocused(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         const nameError = validateName(formData.name);
         const passwordError = validatePassword(formData.password);
         const confirmError = validateConfirmPassword(formData.password, formData.confirmPassword);
+        const photoURLError = validatePhotoURL(formData.photoURL);
 
         const newErrors = {
             name: nameError,
             password: passwordError,
-            confirmPassword: confirmError
+            confirmPassword: confirmError,
+            photoURL: photoURLError
         };
 
         setErrors(newErrors);
 
-        // Prevent submission if errors exist
-        if (nameError || passwordError || confirmError) return;
+        if (nameError || passwordError || confirmError || photoURLError) return;
 
         try {
             setLoading(true);
-            await createUser(formData.email, formData.password, formData.name);
+            await createUser(formData.email, formData.password, formData.name, formData.photoURL);
             toast.success('Registration successful! Welcome to HobbyHub.');
             setTimeout(() => {
                 setLoading(false);
@@ -143,6 +138,17 @@ const Registration = () => {
             toast.error(err.message || 'Google sign in failed');
         }
     };
+
+    const handleGithubLoginClick = () => {
+        handleGitHubLogin()
+            .then((result) => {
+                SetUser(result.user);
+                navigate(location?.state || '/');
+            })
+            .catch((error) => {
+                console.error('Error signing in with GitHub:', error);
+            });
+    }
 
     return (
         <>
@@ -184,6 +190,21 @@ const Registration = () => {
                                 className="w-full px-4 py-3 border border-gray-200 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholder="Enter your email"
                             />
+                        </div>
+
+                        <div>
+                            <label htmlFor="photoURL" className="block text-sm font-medium mb-1">Photo URL</label>
+                            <input
+                                id="photoURL"
+                                name="photoURL"
+                                type="url"
+                                value={formData.photoURL}
+                                onChange={handleChange}
+                                disabled={loading}
+                                className="w-full px-4 py-3 border border-gray-200 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="Paste profile photo URL"
+                            />
+                            {errors.photoURL && <p className="text-sm text-red-500 mt-1">{errors.photoURL}</p>}
                         </div>
 
                         <div>
@@ -278,11 +299,11 @@ const Registration = () => {
                         </button>
 
                         <button
-                            disabled
-                            className="flex items-center justify-center w-full gap-2 border border-gray-300 rounded-xl py-2 opacity-60 cursor-not-allowed"
+                            className="flex items-center justify-center w-full gap-2 border border-gray-300 rounded-xl py-2 transition duration-300 ease-in-out transform hover:bg-gray-200 hover:scale-105 hover:shadow-md active:scale-95 cursor-pointer hover:text-black"
+                            onClick={handleGithubLoginClick}
                         >
-                            <FaGithub className="text-xl text-black" />
-                            <span className="text-sm font-medium">GitHub coming soon</span>
+                            <FaGithub className="text-xl" />
+                            <span className="text-sm font-medium">Continue with GitHub</span>
                         </button>
                     </div>
                 </div>

@@ -7,7 +7,7 @@ import { useNavigate, useLocation } from 'react-router';
 import toast, { Toaster } from 'react-hot-toast';
 
 const Login = () => {
-    const { user, SetUser, handleGoogleLogin, loginWithEmail } = useContext(AuthContext);
+    const { user, SetUser, handleGoogleLogin, loginWithEmail, handleGitHubLogin } = useContext(AuthContext);
     const [formData, setFormData] = useState({ email: '', password: '' });
     const [error, setError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -90,6 +90,25 @@ const Login = () => {
                 setError(errorMessage);
             });
     };
+
+    const handleGithubLoginClick = () => {
+        setLoading(true);
+        handleGitHubLogin()
+            .then((result) => {
+                SetUser(result.user);
+                toast.success('Welcome back!');
+                setTimeout(() => {
+                    setLoading(false);
+                    navigate(location?.state || '/');
+                }, 1000);
+            })
+            .catch((error) => {
+                setLoading(false);
+                console.error('Error signing in with GitHub:', error);
+                toast.error('GitHub login failed.');
+            });
+    };
+
 
     return (
         <>
@@ -189,11 +208,11 @@ const Login = () => {
                             <span className="text-sm font-medium">Continue with Google</span>
                         </button>
                         <button
-                            disabled
-                            className="flex items-center justify-center w-full gap-2 border border-gray-300 rounded-xl py-2 opacity-60 cursor-not-allowed"
+                            className="flex items-center justify-center w-full gap-2 border border-gray-300 rounded-xl py-2 transition duration-300 ease-in-out transform hover:bg-gray-200 hover:scale-105 hover:shadow-md active:scale-95 cursor-pointer hover:text-black"
+                            onClick={handleGithubLoginClick}
                         >
-                            <FaGithub className="text-xl text-black" />
-                            <span className="text-sm font-medium text-gray-700">GitHub coming soon</span>
+                            <FaGithub className="text-xl" />
+                            <span className="text-sm font-medium">Continue with GitHub</span>
                         </button>
                     </div>
                 </div>

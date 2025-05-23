@@ -7,35 +7,65 @@ const AuthProvider = ({ children }) => {
     const [user, SetUser] = useState(null);
     const [loading, SetLoading] = useState(true);
 
-    const createUser = (email, password, name) => {
+
+    // Google login
+    const GoogleProvider = new GoogleAuthProvider();
+    const handleGoogleLogin = () => {
+        return signInWithPopup(auth, GoogleProvider);
+    };
+
+    // GitHub login
+    const GitHubProvider = new GithubAuthProvider();
+    const handleGitHubLogin = () => {
+        return signInWithPopup(auth, GitHubProvider);
+
+    }
+
+    // Create user with email and password
+    const createUser = (email, password, name, photoURL) => {
         SetLoading(true);
-        const defaultPhotoURL = 'https://www.paralysistreatments.com/wp-content/uploads/2018/02/no_profile_img.png';
+        const finalPhoto = photoURL || 'https://www.paralysistreatments.com/wp-content/uploads/2018/02/no_profile_img.png';
+
         return createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
+            .then(async (userCredential) => {
                 const user = userCredential.user;
 
-                return updateProfile(user, {
+                await updateProfile(user, {
                     displayName: name,
-                    photoURL: defaultPhotoURL
-                }).then(() => {
-                    SetUser({ ...user, displayName: name });
-                    return true;
+                    photoURL: finalPhoto,
                 });
+
+                const newUser = {
+                    uid: user.uid,
+                    name,
+                    email,
+                    photoURL: finalPhoto,
+                };
+
+                await fetch('http://localhost:3000/users', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(newUser),
+                });
+
+                SetUser({ ...user, displayName: name, photoURL: finalPhoto });
+                return true;
             })
             .catch((error) => {
                 console.error('Error creating user:', error);
                 throw error;
             });
     };
+
+    // Login with email and password
     const loginWithEmail = (email, password) => {
         SetLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     }
 
-    const GoogleProvider = new GoogleAuthProvider();
-    const handleGoogleLogin = () => {
-        return signInWithPopup(auth, GoogleProvider);
-    };
+    // Logout
     const logout = () => {
         SetLoading(true);
         auth.signOut()
@@ -46,6 +76,8 @@ const AuthProvider = ({ children }) => {
                 console.error('Error signing out:', error);
             });
     };
+
+    // Reset password
     const resetPassword = (email) => {
         SetLoading(true);
         return sendPasswordResetEmail(auth, email)
@@ -59,6 +91,8 @@ const AuthProvider = ({ children }) => {
                 throw error;
             });
     };
+
+    // Update user profile
     const updateUserProfile = (name, photoURL) => {
         SetLoading(true);
         return updateProfile(auth.currentUser, {
@@ -83,6 +117,8 @@ const AuthProvider = ({ children }) => {
             });
     };
 
+
+    // Observe user state
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -96,11 +132,6 @@ const AuthProvider = ({ children }) => {
         return () => unsubscribe();
     }, []);
 
-    const GitHubProvider = new GithubAuthProvider();
-    const handleGitHubLogin = () => {
-        return signInWithPopup(auth, GitHubProvider);
-
-    }
 
     const authData = {
         user,
