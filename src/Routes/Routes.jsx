@@ -12,6 +12,7 @@ import MyGroups from "../Pages/MyGroups/MyGroups";
 import PrivateRoutes from "./PrivateRoute";
 import GroupDetails from "../Pages/GroupDetails/GroupDetails";
 import UpdateGroup from "../Pages/UpdateGroup/UpdateGroup";
+import JoinedGroups from "../Pages/JoinedGroups/JoinedGroups";
 
 export const router = createBrowserRouter([
     {
@@ -62,6 +63,10 @@ export const router = createBrowserRouter([
             {
                 path: "updateGroup/:id",
                 element: <PrivateRoutes><UpdateGroup></UpdateGroup></PrivateRoutes>
+            },
+            {
+                path: "/joinedGroups",
+                element: <PrivateRoutes><JoinedGroups></JoinedGroups></PrivateRoutes>
             }
         ]
     },

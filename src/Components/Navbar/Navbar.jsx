@@ -1,6 +1,6 @@
 import React, { use, useState, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router';
-import { Home, Users, PlusCircle, UserCircle, Menu, LogIn, UserPlus } from 'lucide-react';
+import { Home, Users, PlusCircle, UserCircle, Menu, LogIn, UserPlus, Users2 } from 'lucide-react';
 import { AuthContext } from '../../Provider/AuthContext';
 import ToggleTheme from '../ToggleTheme/ToggleTheme';
 
@@ -72,6 +72,8 @@ const Navbar = () => {
             <>
               <li><NavLink to="/create-group" className={navLinkClass}><PlusCircle className="w-4 h-4" /> Create Group</NavLink></li>
               <li><NavLink to="/my-groups" className={navLinkClass}><UserCircle className="w-4 h-4" /> My Groups</NavLink></li>
+              <li><NavLink to="/joinedGroups" className={navLinkClass}><Users2 className="w-4 h-4" /> Joined Groups</NavLink></li>
+
             </>
           )}
         </ul>
@@ -147,6 +149,7 @@ const Navbar = () => {
             <li><NavLink to="/groups" className={navLinkClass}><Users className="w-4 h-4" /> All Groups</NavLink></li>
             <li><NavLink to="/create-group" className={navLinkClass}><PlusCircle className="w-4 h-4" /> Create Group</NavLink></li>
             <li><NavLink to="/my-groups" className={navLinkClass}><UserCircle className="w-4 h-4" /> My Groups</NavLink></li>
+            <li><NavLink to="/joinedGroups" className={navLinkClass}><Users2 className="w-4 h-4" /> Joined Groups</NavLink></li>
           </ul>
         </div>
       )}
