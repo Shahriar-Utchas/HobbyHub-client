@@ -24,7 +24,7 @@ const CreateGroups = () => {
             spot_taken: 1,
         };
 
-        fetch('http://localhost:3000/createGroup', {
+        fetch('https://hobby-hub-server-side.vercel.app/createGroup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

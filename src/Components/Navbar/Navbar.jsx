@@ -94,12 +94,12 @@ const Navbar = () => {
 
               {isProfileOpen && (
                 <div className="absolute right-0 mt-2 w-44 bg-base-100 rounded-xl shadow-lg ring-1 ring-base-300 z-50 animate-fade-in">
-                  <NavLink
+                  {/* <NavLink
                     to="/profile"
                     className="block px-4 py-2 text-sm text-base-content hover:bg-base-200 rounded-lg"
                   >
                     Profile
-                  </NavLink>
+                  </NavLink> */}
                   <button
                     onClick={logout}
                     className="w-full text-left px-4 py-2 text-sm text-error hover:bg-error-content/10 rounded-lg transition"

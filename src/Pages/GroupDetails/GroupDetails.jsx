@@ -31,7 +31,7 @@ const GroupDetails = () => {
 
         // Check if user has already joined the group
         if (user?.email) {
-            fetch(`http://localhost:3000/checkUserJoined/${user.email}/${_id}`)
+            fetch(`https://hobby-hub-server-side.vercel.app/checkUserJoined/${user.email}/${_id}`)
                 .then(res => res.json())
                 .then(data => {
                     if (data) {
@@ -54,7 +54,7 @@ const GroupDetails = () => {
             hobbyCategory,
         };
 
-        fetch('http://localhost:3000/joinGroup', {
+        fetch('https://hobby-hub-server-side.vercel.app/joinGroup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ const GroupDetails = () => {
         })
             .then((res) => res.json())
             .then(() => {
-                return fetch(`http://localhost:3000/updateGroupSpot/${_id}`, {
+                return fetch(`https://hobby-hub-server-side.vercel.app/updateGroupSpot/${_id}`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',
@@ -157,8 +157,8 @@ const GroupDetails = () => {
                         onClick={handleJoinGroup}
                         disabled={joined || loading}
                         className={`w-full py-2 rounded-md transition duration-300 border border-gray-300 ${joined ? 'bg-green-600 text-white' :
-                                loading ? 'bg-gray-400 text-white' :
-                                    'bg-gray-900 hover:bg-black text-white'
+                            loading ? 'bg-gray-400 text-white' :
+                                'bg-gray-900 hover:bg-black text-white'
                             }`}
                     >
                         {joined ? 'Joined' : loading ? 'Joining...' : 'Join Group'}

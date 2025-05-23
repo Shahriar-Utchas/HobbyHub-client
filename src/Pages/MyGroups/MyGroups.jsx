@@ -9,7 +9,7 @@ const MyGroups = () => {
 
     useEffect(() => {
         if (user?.email) {
-            fetch(`http://localhost:3000/groupByEmail/${user.email}`)
+            fetch(`https://hobby-hub-server-side.vercel.app/groupByEmail/${user.email}`)
                 .then(res => res.json())
                 .then(data => setGroups(data));
         }
@@ -31,7 +31,7 @@ const MyGroups = () => {
         });
 
         if (result.isConfirmed) {
-            fetch(`http://localhost:3000/deleteGroup/${groupId}`, {
+            fetch(`https://hobby-hub-server-side.vercel.app/deleteGroup/${groupId}`, {
                 method: 'DELETE',
             })
                 .then(res => {

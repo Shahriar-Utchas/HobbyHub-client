@@ -9,7 +9,7 @@ const UpdateGroup = () => {
     const id = useParams();
     const [groups, setGroups] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:3000/group/${id.id}`)
+        fetch(`https://hobby-hub-server-side.vercel.app/group/${id.id}`)
             .then(res => res.json())
             .then(data => setGroups(data));
     }, [id]);
@@ -52,7 +52,7 @@ const UpdateGroup = () => {
         };
 
         //Update the group data
-        fetch(`http://localhost:3000/updateGroup/${id.id}`, {
+        fetch(`https://hobby-hub-server-side.vercel.app/updateGroup/${id.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

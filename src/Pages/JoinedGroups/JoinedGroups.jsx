@@ -12,7 +12,7 @@ const JoinedGroups = () => {
 
     useEffect(() => {
         if (user?.email) {
-            fetch(`http://localhost:3000/checkUserGroup/${user.email}`)
+            fetch(`https://hobby-hub-server-side.vercel.app/checkUserGroup/${user.email}`)
                 .then((res) => res.json())
                 .then((data) => {
                     setJoinedGroups(data);
@@ -34,7 +34,7 @@ const JoinedGroups = () => {
             confirmButtonText: 'Yes, leave it!',
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:3000/leaveGroup/${groupId}/${user.email}`, {
+                fetch(`https://hobby-hub-server-side.vercel.app/leaveGroup/${groupId}/${user.email}`, {
                     method: 'DELETE',
                 })
                     .then((res) => res.json())

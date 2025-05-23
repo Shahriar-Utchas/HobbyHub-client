@@ -42,7 +42,7 @@ const AuthProvider = ({ children }) => {
                     photoURL: finalPhoto,
                 };
 
-                await fetch('http://localhost:3000/users', {
+                await fetch('https://hobby-hub-server-side.vercel.app/users', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

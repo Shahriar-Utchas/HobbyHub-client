@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                loader: () => fetch("http://localhost:3000/groups"),
+                loader: () => fetch("https://hobby-hub-server-side.vercel.app/groups"),
                 hydrateFallbackElement: <div className="flex justify-center items-center h-screen">
                     <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-blue-500"></div>
                 </div>,
@@ -38,7 +38,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/groups",
-                loader: () => fetch("http://localhost:3000/groups"),
+                loader: () => fetch("https://hobby-hub-server-side.vercel.app/groups"),
                 hydrateFallbackElement: <div className="flex justify-center items-center h-screen">
                     <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-blue-500"></div>
                 </div>,
@@ -54,7 +54,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "groupDetails/:id",
-                loader: ({ params }) => fetch(`http://localhost:3000/group/${params.id}`),
+                loader: ({ params }) => fetch(`https://hobby-hub-server-side.vercel.app/group/${params.id}`),
                 hydrateFallbackElement: <div className="flex justify-center items-center h-screen">
                     <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-blue-500"></div>
                 </div>,
