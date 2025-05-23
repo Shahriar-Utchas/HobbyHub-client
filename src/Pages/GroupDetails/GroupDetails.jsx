@@ -29,18 +29,13 @@ const GroupDetails = () => {
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
 
-        // Check if user has already joined the group
         if (user?.email) {
             fetch(`https://hobby-hub-server-side.vercel.app/checkUserJoined/${user.email}/${_id}`)
                 .then(res => res.json())
                 .then(data => {
-                    if (data) {
-                        setJoined(true);
-                    }
+                    if (data) setJoined(true);
                 })
-                .catch(err => {
-                    console.error('Check join error:', err);
-                });
+                .catch(err => console.error('Check join error:', err));
         }
     }, [user, _id]);
 
@@ -56,24 +51,20 @@ const GroupDetails = () => {
 
         fetch('https://hobby-hub-server-side.vercel.app/joinGroup', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(userData),
         })
-            .then((res) => res.json())
+            .then(res => res.json())
             .then(() => {
                 return fetch(`https://hobby-hub-server-side.vercel.app/updateGroupSpot/${_id}`, {
                     method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                 });
             })
-            .then((res) => res.json())
-            .then((data) => {
+            .then(res => res.json())
+            .then(data => {
                 if (data.modifiedCount > 0 || data.upsertedCount > 0) {
-                    setSpotTaken((prev) => prev + 1);
+                    setSpotTaken(prev => prev + 1);
                     setJoined(true);
                     Swal.fire({
                         icon: 'success',
@@ -84,13 +75,49 @@ const GroupDetails = () => {
                     });
                 }
             })
-            .catch((error) => {
-                console.error('Error:', error);
+            .catch(error => {
+                console.error('Join error:', error);
                 Swal.fire('Error', 'Failed to join group', 'error');
             })
-            .finally(() => {
-                setLoading(false);
-            });
+            .finally(() => setLoading(false));
+    };
+
+    const handleLeaveGroup = () => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You will leave this group.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, leave it!',
+        }).then(result => {
+            if (result.isConfirmed) {
+                setLoading(true);
+                fetch(`https://hobby-hub-server-side.vercel.app/leaveGroup/${_id}/${user.email}`, {
+                    method: 'DELETE',
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount > 0) {
+                            return fetch(`https://hobby-hub-server-side.vercel.app/updateGroupSpotLeave/${_id}`, {
+                                method: 'PATCH',
+                            });
+                        } else {
+                            throw new Error("Failed to leave group");
+                        }
+                    })
+                    .then(res => res.json())
+                    .then(() => {
+                        setSpotTaken(prev => Math.max(0, prev - 1));
+                        setJoined(false);
+                        Swal.fire('Left!', 'You have left the group.', 'success');
+                    })
+                    .catch(err => {
+                        console.error('Leave error:', err);
+                        Swal.fire('Error', 'Failed to leave group', 'error');
+                    })
+                    .finally(() => setLoading(false));
+            }
+        });
     };
 
     return (
@@ -134,7 +161,7 @@ const GroupDetails = () => {
                             </div>
                             <div>
                                 <div className="font-semibold">{groupCreatorName}</div>
-                                <div className="text-sm">{groupCreatorEmail || "organizer@email.com"}</div>
+                                <div className="text-sm">{groupCreatorEmail}</div>
                             </div>
                         </div>
                     </div>
@@ -154,14 +181,16 @@ const GroupDetails = () => {
                     </div>
 
                     <button
-                        onClick={handleJoinGroup}
-                        disabled={joined || loading}
-                        className={`w-full py-2 rounded-md transition duration-300 border border-gray-300 ${joined ? 'bg-green-600 text-white' :
-                            loading ? 'bg-gray-400 text-white' :
+                        onClick={joined ? handleLeaveGroup : handleJoinGroup}
+                        disabled={loading}
+                        className={`w-full py-2 rounded-md transition duration-300 border border-gray-300 ${loading ? 'bg-gray-400 text-white' :
+                            joined ? 'bg-red-600 hover:bg-red-700 text-white' :
                                 'bg-gray-900 hover:bg-black text-white'
                             }`}
                     >
-                        {joined ? 'Joined' : loading ? 'Joining...' : 'Join Group'}
+                        {loading
+                            ? (joined ? 'Leaving...' : 'Joining...')
+                            : (joined ? 'Leave Group' : 'Join Group')}
                     </button>
                 </div>
             </div>

@@ -19,7 +19,7 @@ const AllGroups = () => {
     <>
       <div ref={topRef}>
         <h2 className="text-4xl font-bold text-center my-6 text-base-content">Featured Groups</h2>
-        <p className="text-center text-base-content/70 mb-2">
+        <p className="text-center text-base-content/70 mb-2 px-4">
           Join our community and explore new interests with like-minded individuals.
         </p>
       </div>

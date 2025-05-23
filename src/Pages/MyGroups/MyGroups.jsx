@@ -49,15 +49,17 @@ const MyGroups = () => {
     return (
         <div className="min-h-screen bg-base p-8">
             {/* Top Bar */}
-            <div className="flex justify-between items-center mb-8">
+            <div className="flex flex-col md:flex-row justify-center md:justify-between gap-4 md:gap-0 items-center mb-8 ">
+                {/*  */}
                 <div>
-                    <h1 className="text-4xl font-bold">My Groups</h1>
-                    <p className="text-gray-500 mt-1">Manage the hobby groups you've created</p>
+                    <h1 className="text-2xl md:text-4xl font-bold px-16 md:px-0">My Groups</h1>
+                    <p className="text-sm mt-1">Manage the hobby groups you've created</p>
                 </div>
                 <Link to="/create-group">
-                    <button className="bg-[#0F172A] text-white font-semibold px-6 py-2 rounded-md hover:opacity-90">
+                    <button className="bg-[#0F172A] text-white font-semibold px-6 py-2 rounded-md hover:opacity-90 w-full max-w-xs">
                         Create New Group
                     </button>
+
                 </Link>
             </div>
 
@@ -75,7 +77,7 @@ const MyGroups = () => {
                     </Link>
                 </div>
             ) : (
-                <div className="grid md:grid-cols-3 gap-6">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {groups.map(group => (
                         <div
                             key={group._id}
@@ -112,7 +114,7 @@ const MyGroups = () => {
                                 <div className="flex gap-2">
                                     <Link to={`/groupDetails/${group._id}`} className="w-full">
                                         <button className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-800 transition">
-                                            See Details
+                                            Details
                                         </button>
                                     </Link>
                                     <Link to={`/updateGroup/${group._id}`} className="w-full">

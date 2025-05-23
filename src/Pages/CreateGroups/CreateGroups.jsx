@@ -56,7 +56,7 @@ const CreateGroups = () => {
 
     return (
         <div className="max-w-3xl mx-auto py-14 px-6">
-            <h1 className="text-4xl font-bold mb-2">Create a New Group</h1>
+            <h1 className="text-3xl md:text-4xl font-bold mb-2">Create a New Group</h1>
             <p className=" mb-8 text-lg">
                 Start a community around your hobby or passion.
             </p>

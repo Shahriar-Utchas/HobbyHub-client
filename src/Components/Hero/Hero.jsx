@@ -43,11 +43,11 @@ const Hero = () => {
         <div className="relative">
             <Swiper
                 modules={[Autoplay, Pagination, Navigation]}
-                autoplay={{ delay: 3000 }}
+                autoplay={{ delay: 5000 }}
                 loop
                 pagination={{ clickable: true }}
                 navigation
-                className="w-full h-[450px]"
+                className="w-full h-[450px] md:h-[550px]"
             >
                 {slides.map((slide, index) => (
                     <SwiperSlide key={index} className="h-full flex items-center justify-center">
@@ -60,24 +60,27 @@ const Hero = () => {
                             />
 
                             {/* Overlay */}
-                            <div className="absolute inset-0 bg-black/50 z-10"></div>
+                            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-transparent z-10"></div>
+
 
                             {/* Text content */}
-                            <div className="absolute inset-0 flex items-center justify-center text-center px-4 z-20">
+                            <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-20">
                                 <motion.div
                                     initial={{ opacity: 0, y: 30 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.8, delay: 0.2 }}
                                 >
-                                    <h1 className="text-white text-3xl md:text-5xl font-bold mb-4">{slide.title}</h1>
-                                    <p className="text-white text-base md:text-lg mb-6 max-w-xl mx-auto">
+                                    <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-extrabold mb-3 sm:mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                                        {slide.title}
+                                    </h1>
+
+                                    <p className="text-white text-base sm:text-lg md:text-xl mb-4 sm:mb-6 max-w-md sm:max-w-xl mx-auto px-6 sm:px-8 drop-shadow-[0_2px_3px_rgba(0,0,0,0.7)]">
                                         {slide.subtitle}
                                     </p>
-
                                     {slide.path && (
                                         <button
                                             onClick={() => navigate(slide.path)}
-                                            className="bg-slate-900 text-white py-2 px-6 rounded-lg hover:bg-slate-800 transition duration-300 ease-in-out"
+                                            className="bg-slate-900 text-white py-2 px-5 sm:px-6 rounded-lg hover:bg-slate-800 transition duration-300 ease-in-out text-sm sm:text-base"
                                         >
                                             {slide.button}
                                         </button>
@@ -86,13 +89,12 @@ const Hero = () => {
                             </div>
                         </div>
                     </SwiperSlide>
-
                 ))}
             </Swiper>
             <style jsx>{`
                 .swiper-button-prev,
                 .swiper-button-next {
-                    color: #1e3a8a; /* Tailwind's blue-800 hex */
+                    color: #1e3a8a;
                     z-index: 30;
                 }
             `}</style>

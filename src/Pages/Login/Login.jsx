@@ -24,13 +24,6 @@ const Login = () => {
         }
     }, [location]);
 
-
-    // useEffect(() => {
-    //     if (user) {
-    //         navigate(location?.state || '/');
-    //     }
-    // }, [user, navigate]);
-
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }, []);
@@ -48,7 +41,7 @@ const Login = () => {
                 toast.success('Welcome back!');
                 setTimeout(() => {
                     setLoading(false);
-                    navigate(location?.state || '/')
+                    navigate(location?.state || '/');
                 }, 1000);
             })
             .catch((error) => {
@@ -58,17 +51,34 @@ const Login = () => {
             });
     };
 
+    const handleGithubLoginClick = () => {
+        setLoading(true);
+        handleGitHubLogin()
+            .then((result) => {
+                SetUser(result.user);
+                toast.success('Welcome back!');
+                setTimeout(() => {
+                    setLoading(false);
+                    navigate(location?.state || '/');
+                }, 1000);
+            })
+            .catch((error) => {
+                setLoading(false);
+                console.error('Error signing in with GitHub:', error);
+                toast.error('GitHub login failed.');
+            });
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
         loginWithEmail(formData.email, formData.password)
             .then((userCredential) => {
-                const user = userCredential.user;
-                SetUser(user);
+                SetUser(userCredential.user);
                 toast.success('Welcome back!');
                 setTimeout(() => {
                     setLoading(false);
-                    navigate(location?.state || '/')
+                    navigate(location?.state || '/');
                 }, 1000);
             })
             .catch((error) => {
@@ -91,36 +101,16 @@ const Login = () => {
             });
     };
 
-    const handleGithubLoginClick = () => {
-        setLoading(true);
-        handleGitHubLogin()
-            .then((result) => {
-                SetUser(result.user);
-                toast.success('Welcome back!');
-                setTimeout(() => {
-                    setLoading(false);
-                    navigate(location?.state || '/');
-                }, 1000);
-            })
-            .catch((error) => {
-                setLoading(false);
-                console.error('Error signing in with GitHub:', error);
-                toast.error('GitHub login failed.');
-            });
-    };
-
-
     return (
         <>
             <Toaster position="top-right" />
-            {redirectMessage && (
-                <p className="text-yellow-600 text-sm absolute left-1/2 -translate-x-1/2 mt-4">
-                    {redirectMessage}
-                </p>
-            )}
-
-            <div className="min-h-screen flex items-center justify-center bg-base px-4">
-                <div className="max-w-md w-full space-y-6">
+            <div className="relative min-h-screen flex items-center justify-center bg-base px-6 md:px-8 pb-8 md:pb-0">
+                {redirectMessage && (
+                    <p className="absolute top-6 text-yellow-600 text-sm text-center px-4">
+                        {redirectMessage}
+                    </p>
+                )}
+                <div className="w-full max-w-sm sm:max-w-md space-y-6 mx-auto py-8 sm:py-12">
                     <div className="text-center">
                         <h2 className="text-3xl font-bold">Welcome Back</h2>
                         <p className="mt-2 text-base">Log in to your HobbyHub account</p>
@@ -176,9 +166,7 @@ const Login = () => {
                             </div>
                         </div>
 
-                        {error && (
-                            <p className="text-red-500 text-sm">{error}</p>
-                        )}
+                        {error && <p className="text-red-500 text-sm">{error}</p>}
 
                         <button
                             type="submit"
@@ -198,6 +186,7 @@ const Login = () => {
                             Register
                         </a>
                     </p>
+
                     <div className="mt-6 space-y-3">
                         <button
                             className="flex items-center justify-center w-full gap-2 border border-gray-300 rounded-xl py-2 transition duration-300 ease-in-out transform hover:bg-yellow-100 hover:scale-105 hover:shadow-md active:scale-95 cursor-pointer hover:text-black"
@@ -207,9 +196,11 @@ const Login = () => {
                             <FcGoogle className="text-xl" />
                             <span className="text-sm font-medium">Continue with Google</span>
                         </button>
+
                         <button
                             className="flex items-center justify-center w-full gap-2 border border-gray-300 rounded-xl py-2 transition duration-300 ease-in-out transform hover:bg-gray-200 hover:scale-105 hover:shadow-md active:scale-95 cursor-pointer hover:text-black"
                             onClick={handleGithubLoginClick}
+                            disabled={loading}
                         >
                             <FaGithub className="text-xl" />
                             <span className="text-sm font-medium">Continue with GitHub</span>

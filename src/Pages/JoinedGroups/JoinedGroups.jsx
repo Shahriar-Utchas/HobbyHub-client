@@ -34,22 +34,38 @@ const JoinedGroups = () => {
             confirmButtonText: 'Yes, leave it!',
         }).then((result) => {
             if (result.isConfirmed) {
+                // First, remove user from the group
                 fetch(`https://hobby-hub-server-side.vercel.app/leaveGroup/${groupId}/${user.email}`, {
                     method: 'DELETE',
                 })
                     .then((res) => res.json())
                     .then((data) => {
                         if (data.deletedCount > 0) {
-                            Swal.fire('Left!', 'You have left the group.', 'success');
-                            setJoinedGroups((prev) =>
-                                prev.filter((group) => group.groupId !== groupId)
-                            );
+                            // Second, update the group's spot_taken count
+                            fetch(`https://hobby-hub-server-side.vercel.app/updateGroupSpotLeave/${groupId}`, {
+                                method: 'PATCH',
+                            })
+                                .then((res) => res.json())
+                                .then(() => {
+                                    Swal.fire('Left!', 'You have left the group.', 'success');
+                                    setJoinedGroups((prev) =>
+                                        prev.filter((group) => group.groupId !== groupId)
+                                    );
+                                })
+                                .catch((err) => {
+                                    console.error('Failed to decrement spot_taken:', err);
+                                    Swal.fire('Error', 'Left group but failed to update spot count.', 'error');
+                                });
                         }
                     })
-                    .catch((err) => console.error('Leave group failed:', err));
+                    .catch((err) => {
+                        console.error('Leave group failed:', err);
+                        Swal.fire('Error', 'Failed to leave the group.', 'error');
+                    });
             }
         });
     };
+
 
     if (loading) {
         return <div className="text-center py-10 font-medium">Loading groups...</div>;

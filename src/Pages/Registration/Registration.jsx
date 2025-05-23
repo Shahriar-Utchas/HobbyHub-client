@@ -32,7 +32,6 @@ const Registration = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
     const [confirmFocused, setConfirmFocused] = useState(false);
-    const [confirmTouched, setConfirmTouched] = useState(false);
     const [passwordFocused, setPasswordFocused] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -84,10 +83,7 @@ const Registration = () => {
     };
 
     const handleConfirmFocus = () => setConfirmFocused(true);
-    const handleConfirmBlur = () => {
-        setConfirmFocused(false);
-        setConfirmTouched(true);
-    };
+    const handleConfirmBlur = () => setConfirmFocused(false);
     const handlePasswordFocus = () => setPasswordFocused(true);
     const handlePasswordBlur = () => setPasswordFocused(false);
 
@@ -139,21 +135,25 @@ const Registration = () => {
         }
     };
 
-    const handleGithubLoginClick = () => {
-        handleGitHubLogin()
-            .then((result) => {
-                SetUser(result.user);
-                navigate(location?.state || '/');
-            })
-            .catch((error) => {
-                console.error('Error signing in with GitHub:', error);
-            });
+    const handleGithubLoginClick = async () => {
+        try {
+            setLoading(true);
+            await handleGitHubLogin();
+            toast.success('Registration successful! Welcome to HobbyHub.');
+            setTimeout(() => {
+                setLoading(false);
+                navigate('/');
+            }, 1000);
+        } catch (err) {
+            setLoading(false);
+            toast.error(err.message || 'Github sign in failed');
+        }
     }
 
     return (
         <>
             <Toaster position="top-right" />
-            <div className="min-h-screen flex items-center justify-center bg-base px-4 my-8">
+            <div className="min-h-screen flex items-center justify-center bg-base px-6 md:px-4 my-8">
                 <div className="max-w-md w-full space-y-8">
                     <div className="text-center">
                         <h2 className="text-3xl font-bold">Create an Account</h2>
@@ -228,7 +228,7 @@ const Registration = () => {
                                         type="button"
                                         onMouseDown={(e) => e.preventDefault()}
                                         onClick={() => setShowPassword(!showPassword)}
-                                        className="absolute right-3 top-3"
+                                        className="absolute right-3 top-3 text-gray-500"
                                     >
                                         {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                                     </button>
@@ -253,7 +253,7 @@ const Registration = () => {
                                     className="w-full px-4 py-3 border border-gray-200 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     placeholder="Confirm your password"
                                 />
-                                {(confirmFocused || confirmTouched || formData.confirmPassword.length > 0) && (
+                                {(confirmFocused || formData.confirmPassword.length > 0) && (
                                     <button
                                         type="button"
                                         onMouseDown={(e) => e.preventDefault()}
@@ -264,7 +264,7 @@ const Registration = () => {
                                     </button>
                                 )}
                             </div>
-                            {(confirmFocused || confirmTouched) && errors.confirmPassword && (
+                            {(confirmFocused || formData.confirmPassword.length > 0) && errors.confirmPassword && (
                                 <p className="text-sm text-red-500 mt-1">{errors.confirmPassword}</p>
                             )}
                         </div>
