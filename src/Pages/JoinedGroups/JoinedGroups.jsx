@@ -3,12 +3,17 @@ import { AuthContext } from '../../Provider/AuthContext';
 import { Link, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import { LogOut, Info } from 'lucide-react';
+import { Helmet } from 'react-helmet';
 
 const JoinedGroups = () => {
     const { user } = useContext(AuthContext);
     const [joinedGroups, setJoinedGroups] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, []);
 
     useEffect(() => {
         if (user?.email) {
@@ -74,6 +79,9 @@ const JoinedGroups = () => {
     if (joinedGroups.length === 0) {
         return (
             <div className="flex flex-col items-center justify-center mt-40 text-center my-30">
+                <Helmet>
+                    <title>HobbyHub | Joined Groups</title>
+                </Helmet>
                 <h2 className="text-xl font-semibold mb-2">You haven't Joined any groups yet</h2>
                 <p className="text-gray-500 mb-6">
                     Start by joining a new hobby group to connect with like-minded people
@@ -101,13 +109,13 @@ const JoinedGroups = () => {
                         <div className="flex gap-4">
                             <button
                                 onClick={() => navigate(`/GroupDetails/${group.groupId}`)}
-                                className="flex items-center gap-2 px-4 py-2 text-sm text-white bg-blue-600 hover:bg-blue-700 rounded"
+                                className="flex items-center gap-2 px-4 py-2 text-sm text-white bg-blue-600 hover:bg-blue-700 rounded cursor-pointer"
                             >
                                 <Info size={16} /> Details
                             </button>
                             <button
                                 onClick={() => handleLeaveGroup(group.groupId)}
-                                className="flex items-center gap-2 px-4 py-2 text-sm text-white bg-red-600 hover:bg-red-700 rounded"
+                                className="flex items-center gap-2 px-4 py-2 text-sm text-white bg-red-600 hover:bg-red-700 rounded cursor-pointer"
                             >
                                 <LogOut size={16} /> Leave
                             </button>

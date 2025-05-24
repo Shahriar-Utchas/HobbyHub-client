@@ -6,6 +6,8 @@ import PopularCategories from '../../Components/PopularCategories/PopularCategor
 import AllGroups from '../AllGroups/AllGroups';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { Helmet } from 'react-helmet';
+import FeaturedGroups from '../FeaturedGroups/FeaturedGroups';
 
 const fadeInUp = {
     initial: { opacity: 0, y: 50 },
@@ -26,12 +28,15 @@ const Home = () => {
 
     return (
         <>
+            <Helmet>
+                <title>HobbyHub | Home</title>
+            </Helmet>
             <motion.div {...fadeInUp}>
                 <Hero />
             </motion.div>
 
             <div data-aos="fade-up">
-                <AllGroups />
+                <FeaturedGroups />
             </div>
 
             <div data-aos="fade-up">

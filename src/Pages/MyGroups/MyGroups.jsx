@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router';
 import { AuthContext } from '../../Provider/AuthContext';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet';
 
 const MyGroups = () => {
     const { user } = useContext(AuthContext);
@@ -48,6 +49,9 @@ const MyGroups = () => {
 
     return (
         <div className="min-h-screen bg-base p-8">
+            <Helmet>
+                <title>HobbyHub | My Groups</title>
+            </Helmet>
             {/* Top Bar */}
             <div className="flex flex-col md:flex-row justify-center md:justify-between gap-4 md:gap-0 items-center mb-8 ">
                 {/*  */}
@@ -113,18 +117,18 @@ const MyGroups = () => {
                                 {/* Action Buttons */}
                                 <div className="flex gap-2">
                                     <Link to={`/groupDetails/${group._id}`} className="w-full">
-                                        <button className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-800 transition">
+                                        <button className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-800 transition cursor-pointer">
                                             Details
                                         </button>
                                     </Link>
                                     <Link to={`/updateGroup/${group._id}`} className="w-full">
-                                        <button className="w-full bg-yellow-500 text-white py-2 rounded-md hover:bg-yellow-600 transition">
+                                        <button className="w-full bg-yellow-500 text-white py-2 rounded-md hover:bg-yellow-600 transition cursor-pointer">
                                             Update
                                         </button>
                                     </Link>
                                     <button
                                         onClick={() => handleDelete(group._id)}
-                                        className="w-full bg-red-600 text-white py-2 rounded-md hover:bg-red-700 transition"
+                                        className="w-full bg-red-600 text-white py-2 rounded-md hover:bg-red-700 transition cursor-pointer"
                                     >
                                         Delete
                                     </button>

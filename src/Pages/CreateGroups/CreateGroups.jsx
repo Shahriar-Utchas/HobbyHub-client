@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../Provider/AuthContext';
+import { Helmet } from 'react-helmet';
 
 const CreateGroups = () => {
     const { user } = useContext(AuthContext);
@@ -56,6 +57,9 @@ const CreateGroups = () => {
 
     return (
         <div className="max-w-3xl mx-auto py-14 px-6">
+            <Helmet>
+                <title>HobbyHub | Create Group</title>
+            </Helmet>
             <h1 className="text-3xl md:text-4xl font-bold mb-2">Create a New Group</h1>
             <p className=" mb-8 text-lg">
                 Start a community around your hobby or passion.
@@ -182,7 +186,7 @@ const CreateGroups = () => {
                     className={`w-full font-semibold py-3 rounded-md transition duration-300 ${isCreating
                         ? 'bg-blue-400 cursor-not-allowed'
                         : 'bg-blue-700 hover:bg-blue-800 text-white'
-                        }`}
+                        } cursor-pointer`}
                 >
                     {isCreating ? 'Creating...' : 'Create Group'}
                 </button>

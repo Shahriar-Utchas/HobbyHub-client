@@ -80,7 +80,7 @@ const Hero = () => {
                                     {slide.path && (
                                         <button
                                             onClick={() => navigate(slide.path)}
-                                            className="bg-slate-900 text-white py-2 px-5 sm:px-6 rounded-lg hover:bg-slate-800 transition duration-300 ease-in-out text-sm sm:text-base"
+                                            className="bg-slate-900 text-white py-2 px-5 sm:px-6 rounded-lg hover:bg-slate-800 transition duration-300 ease-in-out text-sm sm:text-base cursor-pointer"
                                         >
                                             {slide.button}
                                         </button>

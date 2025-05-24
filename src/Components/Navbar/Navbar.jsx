@@ -133,14 +133,14 @@ const Navbar = () => {
             <>
               <NavLink
                 to="/login"
-                className="flex items-center gap-1 px-3 py-1 text-xs font-semibold text-base-content border rounded-lg bg-base-100 hover:bg-base-200 transition lg:px-5 lg:py-2 lg:text-sm lg:gap-2"
+                className="flex items-center gap-1 px-3 py-1 text-xs font-semibold text-base-content border rounded-lg bg-base-100 hover:bg-base-300 transition lg:px-5 lg:py-2 lg:text-sm lg:gap-2 hover:rounded-xl"
               >
                 <LogIn className="w-4 h-6 md:h-4" />
                 Login
               </NavLink>
               <NavLink
                 to="/register"
-                className="flex items-center gap-1 px-3 py-1 text-xs font-semibold text-white bg-slate-900 rounded-lg hover:bg-slate-800 transition lg:px-5 lg:py-2 lg:text-sm lg:gap-2"
+                className="flex items-center gap-1 px-3 py-1 text-xs font-semibold text-white bg-slate-900 rounded-lg hover:bg-slate-800 transition lg:px-5 lg:py-2 lg:text-sm lg:gap-2 hover:rounded-xl"
               >
                 <UserPlus className="w-4 h-6 md:h-4" />
                 Register

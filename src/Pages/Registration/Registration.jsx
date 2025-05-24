@@ -5,6 +5,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { useNavigate } from 'react-router';
 import { AuthContext } from '../../Provider/AuthContext';
 import toast, { Toaster } from 'react-hot-toast';
+import { Helmet } from 'react-helmet';
 
 const Registration = () => {
     const { createUser, handleGoogleLogin, handleGitHubLogin } = useContext(AuthContext);
@@ -152,6 +153,9 @@ const Registration = () => {
 
     return (
         <>
+            <Helmet>
+                <title>HobbyHub | Registration</title>
+            </Helmet>
             <Toaster position="top-right" />
             <div className="min-h-screen flex items-center justify-center bg-base px-6 md:px-4 my-8">
                 <div className="max-w-md w-full space-y-8">

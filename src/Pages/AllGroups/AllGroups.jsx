@@ -1,10 +1,15 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import { Link, useLoaderData } from 'react-router';
 
 const AllGroups = () => {
   const groupsData = useLoaderData();
   const [showAll, setShowAll] = useState(false);
   const topRef = useRef(null); // ref to scroll to
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
 
   const displayedGroups = showAll ? groupsData : groupsData.slice(0, 6);
 
@@ -17,8 +22,11 @@ const AllGroups = () => {
 
   return (
     <>
+      <Helmet>
+        <title>HobbyHub | Groups</title>
+      </Helmet>
       <div ref={topRef}>
-        <h2 className="text-4xl font-bold text-center my-6 text-base-content">Featured Groups</h2>
+        <h2 className="text-4xl font-bold text-center my-6 text-base-content">All Groups</h2>
         <p className="text-center text-base-content/70 mb-2 px-4">
           Join our community and explore new interests with like-minded individuals.
         </p>
@@ -60,7 +68,7 @@ const AllGroups = () => {
               </div>
 
               <Link to={`/GroupDetails/${group._id}`}>
-                <button className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-800 transition">
+                <button className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-800 transition cursor-pointer">
                   See Details
                 </button>
               </Link>
@@ -73,7 +81,7 @@ const AllGroups = () => {
         <div className="text-center my-6">
           <button
             onClick={handleToggle}
-            className="bg-slate-900 text-white py-2 px-4 rounded-md hover:bg-slate-700 transition"
+            className="bg-slate-900 text-white py-2 px-4 rounded-md hover:bg-slate-700 transition cursor-pointer"
           >
             {showAll ? 'Show Less' : 'View All Groups'}
           </button>

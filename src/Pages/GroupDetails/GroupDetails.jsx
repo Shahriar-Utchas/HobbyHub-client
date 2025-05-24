@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from 'react';
 import { useLoaderData } from 'react-router';
 import { AuthContext } from '../../Provider/AuthContext';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet';
 
 const GroupDetails = () => {
     const { user } = useContext(AuthContext);
@@ -122,6 +123,9 @@ const GroupDetails = () => {
 
     return (
         <div className="max-w-5xl mx-auto px-6 py-10">
+            <Helmet>
+                <title>HobbyHub | {groupName}</title>
+            </Helmet>
             <div className="relative w-full h-64 rounded-xl overflow-hidden mb-10">
                 <img src={imageUrl} alt={groupName} className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-black/40 flex flex-col justify-end p-6">
@@ -182,16 +186,26 @@ const GroupDetails = () => {
 
                     <button
                         onClick={joined ? handleLeaveGroup : handleJoinGroup}
-                        disabled={loading}
-                        className={`w-full py-2 rounded-md transition duration-300 border border-gray-300 ${loading ? 'bg-gray-400 text-white' :
-                            joined ? 'bg-red-600 hover:bg-red-700 text-white' :
-                                'bg-gray-900 hover:bg-black text-white'
+                        disabled={loading || (!joined && spotTaken >= maxMembers)}
+                        className={`w-full py-2 rounded-md transition duration-300 cursor-pointer border border-gray-300
+    ${loading
+                                ? 'bg-gray-400 text-white'
+                                : joined
+                                    ? 'bg-red-600 hover:bg-red-700 text-white'
+                                    : spotTaken >= maxMembers
+                                        ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
+                                        : 'bg-gray-900 hover:bg-black text-white'
                             }`}
                     >
                         {loading
                             ? (joined ? 'Leaving...' : 'Joining...')
-                            : (joined ? 'Leave Group' : 'Join Group')}
+                            : joined
+                                ? 'Leave Group'
+                                : spotTaken >= maxMembers
+                                    ? 'Group Full'
+                                    : 'Join Group'}
                     </button>
+
                 </div>
             </div>
         </div>
