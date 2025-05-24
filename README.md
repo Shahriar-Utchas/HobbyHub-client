@@ -1,6 +1,6 @@
 # 🎨 HobbyHub - Local Hobby Group Organizer (Client)
 
-## 🌐 Live Site: [Click here](https://your-client-live-url.com)
+## 🌐 Live Site: [Click here](https://hobbyhub-by-utchas.vercel.app/)
 
 ## 🧠 About the Project
 
