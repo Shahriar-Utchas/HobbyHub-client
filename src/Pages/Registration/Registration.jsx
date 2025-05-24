@@ -287,9 +287,9 @@ const Registration = () => {
                         </div>
                     </form>
 
-                    <p className="mt-4 text-center text-sm">
+                    <p className="mt-4 text-center">
                         Already have an account?{' '}
-                        <a href="/login" className="font-medium hover:underline">Log In</a>
+                        <a href="/login" className="font-semibold underline hover:text-blue-600">Log In</a>
                     </p>
 
                     <div className="mt-6 space-y-3 mb-8">
