@@ -22,7 +22,7 @@ const CreateGroups = () => {
             groupCreatorName: user.displayName,
             groupCreatorEmail: user.email,
             ...initial_groupData,
-            spot_taken: 1,
+            spot_taken: 0,
         };
 
         fetch('https://hobby-hub-server-side.vercel.app/createGroup', {

@@ -26,6 +26,12 @@ const Login = () => {
     }, [location]);
 
     useEffect(() => {
+        if (user) {
+            navigate(location?.state || '/');
+        }
+    }, [user, navigate]);
+
+    useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }, []);
 
@@ -104,9 +110,9 @@ const Login = () => {
 
     return (
         <>
-        <Helmet>
-            <title>HobbyHub | Login</title>
-        </Helmet>
+            <Helmet>
+                <title>HobbyHub | Login</title>
+            </Helmet>
             <Toaster position="top-right" />
             <div className="relative min-h-screen flex items-center justify-center bg-base px-6 md:px-8 pb-8 md:pb-0">
                 {redirectMessage && (

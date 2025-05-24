@@ -8,12 +8,18 @@ import toast, { Toaster } from 'react-hot-toast';
 import { Helmet } from 'react-helmet';
 
 const Registration = () => {
-    const { createUser, handleGoogleLogin, handleGitHubLogin } = useContext(AuthContext);
+    const { user, createUser, handleGoogleLogin, handleGitHubLogin } = useContext(AuthContext);
     const navigate = useNavigate();
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }, []);
+
+    useEffect(() => {
+        if (user) {
+            navigate(location?.state || '/');
+        }
+    }, [user, navigate]);
 
     const [formData, setFormData] = useState({
         name: '',
