@@ -1,4 +1,4 @@
-# 🎨 HobbyHub - Local Hobby Group Organizer (Client)
+# HobbyHub - Local Hobby Group Organizer (Client)
 
 [![Live Site](https://img.shields.io/badge/Live_Site-Click_Here-00bcd4?style=for-the-badge)](https://hobbyhub-by-utchas.vercel.app)
 
@@ -47,7 +47,7 @@ HobbyHub-client-side/
 └── README.md       # Project documentation
 
 ```
-## 🛠 Tech Stack
+## Tech Stack
 
 | Tech            | Description                       |
 |-----------------|-----------------------------------|
@@ -64,16 +64,16 @@ HobbyHub-client-side/
 
 ---
 
-## 🧩 How to Install & Run Locally
+## How to Install & Run Locally
 
 Follow these steps to run the project on your local machine:
 
-### 1. Clone the Repository
+1. Clone the Repository
 
 ```sh
-git clone git@github.com:Shahriar-Utchas/HobbyHub-client-side.git
+git clone git@github.com:Shahriar-Utchas/HobbyHub-client.git
 ```
-2. Go to the project folder ```cd HobbyHub-client-side```
+2. Go to the project folder ```cd HobbyHub-client```
 3. Install Project Dependencies
 ```sh
 npm install
