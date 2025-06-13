@@ -2,26 +2,25 @@
 
 [![Live Site](https://img.shields.io/badge/Live_Site-Click_Here-00bcd4?style=for-the-badge)](https://hobbyhub-by-utchas.vercel.app)
 
-## 📖 About the Project
+## About the Project
 
 **HobbyHub** is a platform where people can discover and join local hobby-based groups (e.g., book clubs, hiking crews, painting circles) or create their own. It encourages social engagement through shared interests, helping people build communities around their passions.
 
-## 🚀 Features
+##  Features
 
-- 🔐 **Authentication**
+- **Authentication**
   - Firebase login with Email/Password
   - OAuth Sign-in (Google & GitHub)
-- 🧑‍🤝‍🧑 **Group Creation & Management** for registered users
-- 🔒 **Protected Routes** with persistent login state
-- 🌙 **Dark/Light Theme Toggle**
-- ⚡ **Responsive UI** for desktop, tablet, and mobile
-- 🧁 **SweetAlert2** for elegant notifications
-- 🎞️ **Lottie Animations** & **React Awesome Reveal**
-- 🧭 **Dynamic Routing** and custom 404 page
+- **Group Creation & Management** for registered users
+- **Protected Routes** with persistent login state
+- **Dark/Light Theme Toggle**
+- **Responsive UI** for desktop, tablet, and mobile
+- **SweetAlert2** for elegant notifications
+- **Lottie Animations** & **React Awesome Reveal**
+- **Dynamic Routing** and custom 404 page
 
----
 
-## 📄 Pages Overview
+## Pages Overview
 
 - **Home Page** – Highlights groups and features
 - **Login/Register** – Firebase auth system
@@ -93,7 +92,4 @@ VITE_APP_ID=your_app_id
 
 ## 🔗 Server-Side Repository
 
-To see the backend/server-side of this project, visit:  [**HobbyHub Server-Side Repository**](https://github.com/Shahriar-Utchas/HobbyHub-server-side)
-
-## Contact
-For any inquiries, reach out via [LinkedIn](https://www.linkedin.com/in/shahriar-utchas) or check out the [Portfolio Website](https://shahriar-utchas.vercel.app/).
+To see the backend/server-side of this project, visit:  [**HobbyHub Server-Side Repository**](https://github.com/Shahriar-Utchas/HobbyHub-server)
