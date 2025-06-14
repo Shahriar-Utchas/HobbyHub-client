@@ -4,7 +4,7 @@ const ToggleTheme = () => {
     const [isDark, setIsDark] = useState(false);
 
     useEffect(() => {
-        const savedTheme = localStorage.getItem('theme') || 'dark';
+        const savedTheme = localStorage.getItem('theme') || 'light';
         document.documentElement.setAttribute('data-theme', savedTheme);
         setIsDark(savedTheme === 'dark');
     }, []);
